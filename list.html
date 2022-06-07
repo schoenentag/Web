@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list.html</title>
+</head>
+
+<body>
+    <ol type="A">
+        <li>
+            <ul>짬뽕
+                <li>흰짬뽕</li>
+                <li>빨간짬뽕</li>
+            </ul>
+        </li>
+        <li>칼국수</li>
+        <li>돈가스</li>
+    </ol>
+
+    <h3>내가 좋아하는 음식</h3>
+    <ol>
+        <li>커피
+            <ul>
+                <li>아이스 아메리카노</li>
+                <li>까페라떼</li>
+                <li>카라멜마끼아또</li>
+            </ul>
+        </li>
+        <li>과일
+            <ol type="i">
+                <li>바나나</li>
+                <li>사과</li>
+                <li>오렌지</li>
+            </ol>
+        </li>
+    </ol>
+
+    <dl> 메뉴
+        <dt>커피</dt>
+        <dd>--아메리카노</dd>
+        <dd>--카페라떼</dd>
+        <dt>음료</dt>
+        <dd>--녹차</dd>
+        <dd>--우유</dd>
+    </dl>
+
+    <h3>학생 성적</h3>
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td>영어점수</td>
+            <td>국어점수</td>
+        </tr>
+
+        <tr>
+            <td>홍길동</td>
+            <td>90</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>심청</td>
+            <td>80</td>
+            <td>85</td>
+        </tr>
+    </table>
+    <h3>학생성적</h3>
+    <table border="1">
+        <tr>
+            <td>학생이름</td>
+            <td>영어</td>
+            <td>수학</td>
+            <td>합계</td>
+        </tr>
+
+        <tr>
+            <td>홍길동</td>
+            <td>80</td>
+            <td>85</td>
+            <td>165</td>
+        </tr>
+
+        <tr>
+            <td>김민수</td>
+            <td>75</td>
+            <td>75</td>
+            <td>150</td>
+        </tr>
+
+        <tr>
+            <td>이규식</td>
+            <td>88</td>
+            <td>77</td>
+            <td>165</td>
+        </tr>
+    </table>
+    <br>
+
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td width="100px"></td>
+            <td>연락처</td>
+            <td width="100px"></td>
+        </tr>
+
+        <tr>
+            <td>주소</td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>자기소개</td>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+    <br>
+    <table border="1">
+        <caption>학생성적리스트</caption>
+        <thead>
+            <tr>
+                <th rowspan="2">이름</th>
+                <th>영어</th>
+                <th rowspan="2">사진</th>
+            </tr>
+            <tr>
+                <th>수학</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2"><a href="https://www.daum.net">홍길동</td>
+                <td style ="text-align:right;">90</td>
+                <td rowspan="2"><img src="images/hong.png" width="150px"></td>
+            </tr>
+            <tr>
+                <td style ="text-align:right;">80</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2">김민수</td>
+                <td style ="text-align:right;">80</td>
+                <td rowspan="2"><img src="images/kimminsu.jpg" width="150px"></td>
+            </tr>
+            <tr>
+                <td style ="text-align:right;">70</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2"><a href="profile.html">김하은</td>
+                <td style ="text-align:right;">90</td>
+                <td rowspan="2"><img src="images/hong.png" width="150px"></td>
+            </tr>
+            <tr>
+                <td style ="text-align:right;">80</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>
