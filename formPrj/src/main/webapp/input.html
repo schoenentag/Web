@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style>
+        label{
+            display:inline-block;
+            width:100px;
+            text-align:center;
+            background-color:lightgrey;
+        }
+        /* label:nth-of-type(2){
+            display:inline-block;
+            width:100px;
+            text-align:center;
+            background-color:pink;
+        }
+        form>label:nth-child(3){
+            display:inline-block;
+            width:100px;
+            text-align:center;
+            background-color:lightblue;
+        } */
+    </style>
+</head>
+
+<body>
+    <form>
+        <label for="last_name" style="display:inline-block; width:100px;">이  &nbsp;  름</label>
+        <input type="text" id="last_name" name="last_name" ><br>
+        <label for="id" style="display:inline-block; width:100px;">아  이  디</label>
+        <input type="text" id="id" name="id"><br>
+        <label for="pw" style="display:inline-block; width:100px;">비밀번호</label>
+        <input type="password" name="pw"><br>
+        <label for="hp" style="display:inline-block; width:100px;">연  락  처</label>
+        <input type="nuber" style="width: 50px;"> - <input type="nuber" style="width: 50px;"> - <input type="nuber" style="width: 50px;"><br>
+        <label style="display:inline-block; width:100px;">성별 구분</label>
+        <input type="radio" id="m" name="gender" value="m">
+        <label for="m">남</label>
+        <input type="radio" id="w" name="gender" value="w">
+        <label for="w">여</label><br>
+        <label style="display:inline-block; width:100px;">사용 언어</label>
+        <input type="checkbox" id="korean" name="language" value="korean">
+        <label for="korean"> 한국어</label>
+        <input type="checkbox" id="english" name="language" value="english">
+        <label for="english"> 영어</label>
+        <input type="checkbox" id="japanese" name="language" value="japanese">
+        <label for="english"> 일본어</label>
+        <input type="checkbox" id="chinese" name="language" value="chinese">
+        <label for="chinese"> 중국어</label><br>
+        <label for="introduce" style="display:inline-block; width:100px;">자기 소개</label>
+        <textarea id="introduce" rows="5" cols="33"></textarea><br>
+        <label for="nation" style="display:inline-block; width:100px;">국적</label>
+        <select size="1" id="nation">
+            <option> == 선택== </option>
+            <option value="usa">USA</option>
+            <option value="korea">KOREA</option>
+            <option value="german">GERMAN</option>
+            <option value="japan">JAPAN</option>
+            <option value="china">CHINA</option>
+        </select>
+        <br>
+        <label for="food" style="display:inline-block; width:120px;">좋아하는 음식</label>
+        <select size="1" id="nation">
+            <option> == 선택== </option>
+            <option value="kimchi">김치</option>
+            <option value="boolgogi">불고기</option>
+            <option value="spaghetti">스파게티</option>
+            <option value="bibimbap">비빔밥</option>
+            <option value="steak">스테이크</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="전송">
+
+    </form>
+
+</body>
+
+</html>
