@@ -1,0 +1,33 @@
+/* css/style3.css */
+body{
+    font:14px "맑은 고딕";
+}
+.container{
+    border:1px solid green;
+    width:960px;
+    margin:0 auto;
+}
+header{
+    position: relative;
+    height:280px;
+    font-size:3em;
+    
+    background-image:url(../images/bg.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+header > h1{
+    position:absolute;
+    right:20px;
+    bottom:70px;
+    font-size:1.5em;
+    color:white;
+}
+header >h2{
+    position:absolute;
+    right:20px;
+    bottom:-20px;
+    font-size:1.5em;
+    color:white;
+    background-color: rgba(211,211,211,0.7);
+}
