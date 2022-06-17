@@ -54,4 +54,3 @@ let searchName = names.find(function(val){
 }); 
 
 console.log(searchName);
-
