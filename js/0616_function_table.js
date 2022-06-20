@@ -21,7 +21,9 @@ function createTable(aryData) {
 function createHead(ary) {
     let tag = '<thead><tr>';
     for (let field in ary) { //sname과 age를 가져옴(필드명)
-        tag += '<th>' + ary[field] + '</th>'
+        tag += '<th>' + ary[field] + '</th>' 
+        console.log('ary[field]= >', ary[field]);
+        console.log('field=>',field);
     }
     tag += '</tr> </thead>';
     return tag;
@@ -33,6 +35,7 @@ function createBody(bodyData) { //[{sname:?},{age:?},{height:?}]
     bodyData.forEach((elem)=>{ //for(let elem of bodyData){} 형식으로도 사용가능
         str +='<tr>';
         for(let field in elem){ // for in 오브젝트의 속성(sname)만큼 읽음
+            
             str +='<td>' + elem[field] + '</td>' // elem.name, elem.age ...
         }
         str +='</tr>'
