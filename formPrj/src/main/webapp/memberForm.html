@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="member" method="get">
+		<input type="hidden" name="cmd" value="update"> <!-- //name=파라메터 값 -->
+		회원번호 : <input type="number" name="no"><br>
+		연락처 : <input type="text" name="ph"><br>
+		<input type="submit" value="전송" name="">
+		<!-- http://localhost:8088/formPrj/member?cmd=list // 값(value)에 따라 넘어가는 값이 달라짐-->
+	</form>
+	
+	<script>
+	let xhtp = new XMLHttpRequest(); /*서버로 요청(AJAX))*/
+	xhtp.open('get', 'member?cmd=insert&name=Ajax&addr=Incheon');
+	xhtp.send();
+	xhtp.onload = function(){
+		console.log(xhtp.responseText);
+		
+	}
+	</script>
+
+</body>
+</html>

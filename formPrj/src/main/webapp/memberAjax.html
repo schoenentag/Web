@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberAjax.html</title>
+<style>
+form {
+	border: 2px solid green;
+}
+
+form>label {
+	display: inline-block;
+	width: 25%;
+	background-color: yellow;
+}
+
+#memberName {
+	background-color: aqua;
+}
+
+input[name="phone"] {
+	background-color: aquamarine;
+}
+
+form>input:nth-of-type(4) {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<form action="member" name="memberFrm">
+		<label for="memberNo">회원번호</label> <input type="number"
+			name="memberNo" id="memberNo"><br> <label
+			for="memberName">회원이름</label> <input type="text" name="memberName"
+			id="memberName"><br> <label for="phone">연락처</label> <input
+			type="text" name="phone" id="phone"><br> <label
+			for="address">주소</label> <input type="text" name="address"
+			id="address"><br> <label for="birth">생년월일</label> <input
+			type="date" name="birth" id="birth"><br> <label
+			for="image">사진</label> <input type="file" name="image" id="image"><br>
+
+		<input type="submit" value="추가"> <input type="reset"
+			value="초기화"> <input type="button" value="선택삭제">
+	</form>
+	<div id="show">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>회원이름</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>생년월일</th>
+					<th>사진</th>
+				</tr>
+			</thead>
+			<tbody id="list">
+			</tbody>
+
+		</table>
+	</div>
+	<script>
+	// 추가버튼 클릭
+	    document.forms.memberFrm.addEventListener('submit', function(e){
+		    e.preventDefault();
+		    console.log(this);
+		    let mNo = this.memberNo.value;
+		    let mNm = this.memberName.value;
+		    let mAr = this.address.value;
+		    let mPh = this.phone.value;
+		    let mBi = this.birth.value;
+		    
+		    let xhtp = new XMLHttpRequest();
+		    xhtp.open('post','member'); // 요청방식 post : 매개값이 몸체에 담겨 넣어감 
+		    xhtp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		    xhtp.send(`name=${mNm}&addr=${mAr}&phone=${mPh}&birth=${mBi}&cmd=add`);
+		    xhtp.onload = function(){
+		    	let result = JSON.parse(this.responseText); // this=> xhtp
+		    	document.querySelector('#show tbody').append(makeTr(result));
+		    }
+	    })//추가버튼 end
+	    
+	    // TR생성 
+	    let fields = ['membNo', 'membName','membPhone','membAddr','membBirth','membImage'];
+	    function makeTr(member){
+	    	let tr = document.createElement('tr');
+	    	fields.forEach(field=>{
+	    		let td = document.createElement('td');
+	    		td.innerHTML = member[field];
+	    	    tr.append(td);
+	    	})
+		    return tr;
+	    }// tr생성 끝
+	    
+	    //홈페이지 오픈 시 DB 정보 자동 출력해주는 기능
+	    let ajax = new XMLHttpRequest();
+	    /* let sql = "select * from member;" */
+	    ajax.open('get', 'member?cmd=list');
+	    ajax.send();
+	    ajax.onload = function() {
+	    	let tbody = document.getElementById('list');
+	    	let result = JSON.parse(this.responseText);
+	    	console.log('result', result);
+	    	result.forEach(emp => {
+				let tr = document.createElement('tr');
+				//object 선언된 갯수만큼 필드 보여주기 위해서
+				/* console.log('emp',emp); */
+	    	
+	    	for(let field in emp){
+	    		let td = document.createElement('td');
+	    		td.innerHTML = emp[field];
+	    		tr.append(td);
+	    	}
+	    	tbody.append(tr);
+	    	})
+	    };//onload끝
+	   
+	    
+	</script>
+
+</body>
+
+
+</html>

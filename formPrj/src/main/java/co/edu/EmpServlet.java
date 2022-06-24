@@ -24,7 +24,7 @@ public class EmpServlet extends HttpServlet {
 			throws ServletException, IOException {
 		EmpDAO dao = new EmpDAO();
 		List<Employee>list = dao.empList();
-		Gson gson = new GsonBuilder().create();
+		Gson gson = new GsonBuilder().create(); //사용자의 요청화면 json 데이터 반환
 		response.getWriter().print(gson.toJson(list)); // 응답받은 결과를 화면에 출력 
 	}
 
