@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asynch.html</title>
+    <script>
+        // 동기(Synchronous) vs 비동기(Asynchronous), AJAX : Asynchronous Javascript And XML;
+        // 동기 : 하향식으로 순차적으로 실행 // 비동기 :  mid -> end -> start (순차적x)
+        //비동기 방식
+        // setTimeout(function () {
+        //     console.log('start');
+        // }, 2000); // 2초 후 매개값(콜백함수) 실행
+
+        // setTimeout(function () {
+        //     console.log('mid');
+        // }, 1000); // 1초 후 매개값(콜백함수) 실행
+
+        // setTimeout(function () {
+        //     console.log('end');
+        // }, 1500);
+
+        //동기방식, 메소드안에 메소드가 들어가있지않고 메소드가 나열되어있는 것도 동기방식
+        // setTimeout(function () {
+        //     console.log('start');
+
+        //     setTimeout(function () {
+        //         console.log('mid');
+
+        //         setTimeout(function () {
+        //             console.log('end');
+        //         }, 1500);
+
+        //     }, 1000); // 1초 후 매개값(콜백함수) 실행
+
+        // }, 2000); // 2초 후 매개값(콜백함수) 실행
+
+        //==========================
+
+        let xhtp = new XMLHttpRequest(); // Ajax : 파일 정보 읽기 ★★★
+        xhtp.open('get', '../js/dataset.xml'); // 요청방식, 요청URL 
+        xhtp.send();
+        xhtp.onload = loadCallBack; //on~ 이벤트 관련 속성 : 요청된 파일을 받아올때...
+        
+        function loadCallBack () { 
+            // console.log(xhtp.responseText);  // 받아온 결과 출력
+            // document.write(xhtp.responseText);
+            // let data = JSON.parse(xhtp.responseText);
+            // console.log(data);
+            console.log(this.responseXML); // .xml읽어오는 메소드
+            let doc = this.responseXML;
+            let records = doc.getElementsByTagName('record');
+            // Element의 record, HTMLCollection return (forEach 사용 x, for...of 사용가능)
+            records = doc.querySelectorAll('record'); // NodeList return 
+            console.log(records[0].children[1].innerHTML); // == textContent
+            
+            let show = document.getElementById('show'); // body > ul > id="show"
+
+            records.forEach(member => {
+                // console.log(member)
+                let str = '';
+                for (let i = 0; i < member.children.length; i++) {
+                    str += member.children[i].innerHTML + " "; // member.element[i] 안의 HTML
+                }
+                console.log(str);
+                let li = document.createElement('li');
+                let txt = document.createTextNode(str);
+                li.appendChild(txt);
+                show.appendChild(li);
+
+
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="show">
+        <!-- <li>id, fn, ln, em, sal</li> -->
+
+    </ul>
+
+
+</body>
+
+</html>

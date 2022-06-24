@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<title>박스모델</title>
+	<style>
+		div{
+			width:200px;
+			height:100px;
+			display:inline-block;
+			margin:15px;
+			border:2px solid;
+			border-radius: 20px;
+		}
+		.box_temp {
+			width:200px;
+			height:200px;
+			/* display:inline-block; */
+			/* margin:15px; */
+			border:3px solid green;
+			border-radius: 50% 50% 50% 50%;
+			box-shadow:20px 25px 30px 10px green;
+			
+		}
+		.box1{box-shadow: 2px -2px 5px 0px black;}
+		.box2{box-shadow: 15px 15px 10px 10px gray;}
+
+	</style>
+</head>
+
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div class="box_temp"></div>
+</body>
+
+</html>

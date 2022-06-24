@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>box-sizing</title>
+	<style>
+		.box1{
+			box-sizing: content-box;
+			/* 콘텐츠 영역 기준 */
+			width:300px;
+			height:150px;
+			margin:10px;
+			padding:30px;
+			border:2px solid red;
+		}
+		.box2{
+			box-sizing:border-box;
+			/* 테두리까지(박스전체)기준 */
+			width:300px;
+			height:150px;
+			margin:10px;
+			padding:30px;
+			border:2px solid red;
+		}
+		 
+	</style>
+</head>
+<body>
+	<div class="box1"> box-sizing = "content-box" </div>
+	<div class="box2"> box-sizing = "border-box"</div>
+</body>
+</html>

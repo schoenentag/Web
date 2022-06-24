@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main.html(js)</title>
+    <script>
+        //javascript 영역
+        // 스크립트는 하향식으로 순차적으로 실행함
+    </script>
+</head>
+
+<body>
+    <!-- <input type ="file" id="selectFile" accept="text/plain"> -->
+    <!-- <script src="js/object_constructor.js">
+        // 스크립트 내용이 길어지면 호출하는 방식으로 사용가능
+    </script> -->
+    <ul>
+        <li>Aplle</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+        <!-- <script src="js/0621_array_method.js"></script> -->
+
+        <div>
+            <h1>Cities</h1>
+            <ul>
+                <li id="one" class="red">Seoul</li>
+                <li id="two" class="red">London</li>
+                <li id="three" class="red">Newyork</li>
+                <li id="four">Tokyo</li>
+            </ul>
+        </div>
+        
+        <button id="add1">클릭</button>
+        <button>클릭</button>
+
+        <script>
+            let list = document.getElementsByTagName('li'); // HTMLCollection
+            let detail = list[3];
+            //element, attribute, text => node. DOM API(method(), 속성)
+            let attNode = detail.getAttribute('id');
+            let txtNode = detail.childNodes[0];
+            // console.log(detail, attNode, txtNode);
+
+            document.getElementById('add1');
+            add1.addEventListener('click', function(){
+            //element node 생성
+            let li = document.createElement('li'); // element node 생성
+            li.innerHTML ='대구';
+            let ul = document.querySelector('div > ul');
+            ul.appendChild(li); // <ul><li>대구</li></ul>
+            console.log(li);
+            });
+            
+            let btns = document.querySelectorAll('button'); //NodeList
+            btns[1].addEventListener('click', function(){
+                document.querySelector('div > ul > li').remove();
+            });
+            console.log(btns[1]);
+
+            
+
+            // let btn = document.getElementById('add');
+            // // console.log(btn);
+            // btn.addEventListener('click',function(){
+            // //     alert('!!');
+            //     console.log(this); // window(x), object(x), eventTarget(o)
+            // })
+        </script>
+
+
+</body>
+
+</html>

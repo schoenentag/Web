@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<title>display 속성</title>
+	<style>
+		/* 이미지 영역은 기본적으로 인라인 레벨 */
+		
+		#inline > img{
+			border-color:red;
+			border: width 2px;
+			border-style: solid;
+			padding:10px 15px;
+			margin-left:5px;
+			/* display:block; */
+		}
+		#block > img {
+			display: block;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="inline">
+		<img src="images/pic1.jpg">
+		<img src="images/pic2.jpg">
+		<img src="images/pic3.jpg">
+	</div>
+	<div id="block">
+		<img src="images/pic1.jpg">
+		<img src="images/pic2.jpg">
+		<img src="images/pic3.jpg">
+	</div>
+</body>
+
+</html>
