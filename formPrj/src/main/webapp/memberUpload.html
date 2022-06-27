@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberUpload</title>
+<style>
+form {
+	border: 2px solid green;
+}
+
+form>label {
+	display: inline-block;
+	width: 25%;
+	background-color: yellow;
+}
+
+#memberName {
+	background-color: aqua;
+}
+
+input[name="phone"] {
+	background-color: aquamarine;
+}
+
+form>input:nth-of-type(4) {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<form action="memberUpload" name="memberFrm" method="post" enctype="multipart/form-data">
+		<label for="memberNo">회원번호</label> <input type="number"
+			name="memberNo" id="memberNo"><br> <label
+			for="memberName">회원이름</label> <input type="text" name="memberName"
+			id="memberName"><br> <label for="phone">연락처</label> <input
+			type="text" name="phone" id="phone"><br> <label
+			for="address">주소</label> <input type="text" name="address"
+			id="address"><br> <label for="birth">생년월일</label> <input
+			type="date" name="birth" id="birth"><br> <label
+			for="image">사진</label> <input type="file" name="image" id="image"><br>
+
+		<input type="submit" value="추가"> <input type="reset"
+			value="초기화"> <input type="button" value="선택삭제" id="deleteSel">
+		<input type="button" value="수정" id="modify">
+	</form>
+	<div id="show">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>회원이름</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>생년월일</th>
+					<th>사진</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+
+		</table>
+	</div>
+	<script>
+	
+    //홈페이지 오픈 시 DB 정보 자동 출력해주는 기능
+    let ajax = new XMLHttpRequest();
+    ajax.open('get', 'member?cmd=list');
+    ajax.send();
+    ajax.onload = function() {
+    	let data = JSON.parse(this.responseText);
+    	let tbody = document.querySelector('#show tbody');
+    	
+    	data.forEach(member=>{
+    		tbody.append(makeTr(member));
+    		
+    	});
+    	
+
+    };//onload끝
+  
+	    
+	    // TR생성 
+	    let fields = ['membNo', 'membName','membPhone','membAddr','membBirth','membImage'];
+	    function makeTr(member){
+	    	let tr = document.createElement('tr');
+	    	tr.setAttribute('id', member.membNo); //tr의 attribute 중에 id 활용
+	    	//tr.addEventListener('click', showDetail);
+	    	
+	    	fields.forEach(field=>{
+	    		let td = document.createElement('td');
+	    		//null, 0, undifined, '' => false이외 true;
+	    		td.innerHTML = member[field]? (field == 'membImage' ? '<img width="60px" src ="images/' + member[field]+'">' :member[field]):'';
+	    		/* td.innerHTML = member[field]; */
+	    	    tr.append(td);
+	    	})
+	    	//삭제 버튼
+	    	let btn = document.createElement('button');
+	    	btn.innerHTML ='삭제';
+	    	//btn.addEventListener('click', rowDelete,false); /* 더블링 false */
+	    	let td = document.createElement('td');
+	    	td.append(btn);
+	    	tr.append(td);
+	    	//체크박스.input type='checkbox', tr> td > 버튼
+	    	let chk = document.createElement('input');
+	    	chk.setAttribute("type","checkbox");
+	    	td = document.createElement('td');
+	    	td.append(chk);
+	    	tr.append(td);	    	
+	    	
+		    return tr;
+	    }// tr생성 끝
+	    
+	   
+	</script>
+
+</body>
+
+
+</html>

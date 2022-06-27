@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 // 서블릿은 자바 소스코드 속에 HTML코드가 들어가는 형태
 // get 방식 요청 : 조회
@@ -124,19 +125,36 @@ public class MemberServlet extends HttpServlet {
 
 			// 2.수정
 		} else if (cmd.equals("modify")) {
+			String mNo = request.getParameter("membNo");
+			vo.setMembNo(Integer.parseInt(mNo));
+			JsonObject obj = new JsonObject(); // {"name":"홍길동","age":20}
 			if (dao.updateMember(vo)) {
-				out.print("{\"retCod\":\"Success\"}");
+				// {"membbNo": "mNo", "membName": "membName", "membAddr": "membAddr",
+				// "membPhone": "membPhon", "membBirth": "membBirth","retCode":"Success"}
+				// {"mNo":?,"mName":?,"mAddr":?,...} => object
+				// out.print("{\"retCode\":\"Success\"}");
+				// out.print("{\"membNo\":\"" + mNo + "\", \"membName\":\"" + membName + "\",
+				// \"membAddr\":\"" + membAddr + "\", \"membPhone\":\"" + membPhon + "\",
+				// \"membBirth\":\"" + membBirth + "\", \"retCode\":\"Success\"}");
+				obj.addProperty("membNo", mNo); // {"membNo":20}
+				obj.addProperty("membName", membName);
+				obj.addProperty("membAddr", membAddr);
+				obj.addProperty("membPhone", membPhon);
+				obj.addProperty("membBirth", membBirth);
+				obj.addProperty("retCode", "Success");
+
 			} else {
-				out.print("{\"retCod\":\"Fail\"}");
+				obj.addProperty("retCode", "Fail");
 			}
+			out.print(gson.toJson(obj)); // obj 오브젝트 => json
 
 			// 3.삭제
 		} else if (cmd.equals("remove")) {
 			String delNo = request.getParameter("delNo");
 			if (dao.deleteMember(Integer.parseInt(delNo))) {
-				out.print("{\"retCod\":\"Success\"}");
+				out.print("{\"retCode\":\"Success\"}");
 			} else {
-				out.print("{\"retCod\":\"Fail\"}");
+				out.print("{\"retCode\":\"Fail\"}");
 			}
 
 		}
