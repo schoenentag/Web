@@ -44,17 +44,16 @@ public class MemberUpload extends HttpServlet {
 		
 		MemberVO vo = new MemberVO();
 		vo.setMembName(mn);
-		vo.setMembName(ad);
-		vo.setMembName(ph);
-		vo.setMembName(bi);
-		vo.setMembName(im);
+		vo.setMembAddr(ad);
+		vo.setMembPhone(ph);
+		vo.setMembBirth(bi);
+		vo.setMembImage(im);
 		
 		MemberDAO dao = new MemberDAO();
 		Gson gson = new GsonBuilder().create();
 		PrintWriter out = response.getWriter();
 		
 		dao.insertMember(vo);
-		System.out.println(mn);
 	}
 
 }

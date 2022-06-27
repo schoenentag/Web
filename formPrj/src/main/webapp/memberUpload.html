@@ -90,7 +90,7 @@ form>input:nth-of-type(4) {
 	    	fields.forEach(field=>{
 	    		let td = document.createElement('td');
 	    		//null, 0, undifined, '' => false이외 true;
-	    		td.innerHTML = member[field]? (field == 'membImage' ? '<img width="60px" src ="images/' + member[field]+'">' :member[field]):'';
+	    		td.innerHTML = member[field]? (field == 'membImage') ? '<img width="60px" src ="images/' + member[field]+'">' :member[field]:'';
 	    		/* td.innerHTML = member[field]; */
 	    	    tr.append(td);
 	    	})
