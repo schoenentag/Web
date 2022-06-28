@@ -26,9 +26,12 @@ form>input:nth-of-type(4) {
 	color: red;
 }
 </style>
+<script src="upload.js"></script>
 </head>
+
 <body>
-	<form action="memberUpload" name="memberFrm" method="post" enctype="multipart/form-data">
+	<form action="memberUpload" name="memberFrm" method="post"
+		enctype="multipart/form-data">
 		<label for="memberNo">회원번호</label> <input type="number"
 			name="memberNo" id="memberNo"><br> <label
 			for="memberName">회원이름</label> <input type="text" name="memberName"
@@ -45,6 +48,7 @@ form>input:nth-of-type(4) {
 	</form>
 	<div id="show">
 		<table border="1">
+			<!-- <caption>회원리스트</caption> -->
 			<thead>
 				<tr>
 					<th>회원번호</th>
@@ -61,58 +65,7 @@ form>input:nth-of-type(4) {
 
 		</table>
 	</div>
-	<script>
-	
-    //홈페이지 오픈 시 DB 정보 자동 출력해주는 기능
-    let ajax = new XMLHttpRequest();
-    ajax.open('get', 'member?cmd=list');
-    ajax.send();
-    ajax.onload = function() {
-    	let data = JSON.parse(this.responseText);
-    	let tbody = document.querySelector('#show tbody');
-    	
-    	data.forEach(member=>{
-    		tbody.append(makeTr(member));
-    		
-    	});
-    	
 
-    };//onload끝
-  
-	    
-	    // TR생성 
-	    let fields = ['membNo', 'membName','membPhone','membAddr','membBirth','membImage'];
-	    function makeTr(member){
-	    	let tr = document.createElement('tr');
-	    	tr.setAttribute('id', member.membNo); //tr의 attribute 중에 id 활용
-	    	//tr.addEventListener('click', showDetail);
-	    	
-	    	fields.forEach(field=>{
-	    		let td = document.createElement('td');
-	    		//null, 0, undifined, '' => false이외 true;
-	    		td.innerHTML = member[field]? (field == 'membImage') ? '<img width="60px" src ="images/' + member[field]+'">' :member[field]:'';
-	    		/* td.innerHTML = member[field]; */
-	    	    tr.append(td);
-	    	})
-	    	//삭제 버튼
-	    	let btn = document.createElement('button');
-	    	btn.innerHTML ='삭제';
-	    	//btn.addEventListener('click', rowDelete,false); /* 더블링 false */
-	    	let td = document.createElement('td');
-	    	td.append(btn);
-	    	tr.append(td);
-	    	//체크박스.input type='checkbox', tr> td > 버튼
-	    	let chk = document.createElement('input');
-	    	chk.setAttribute("type","checkbox");
-	    	td = document.createElement('td');
-	    	td.append(chk);
-	    	tr.append(td);	    	
-	    	
-		    return tr;
-	    }// tr생성 끝
-	    
-	   
-	</script>
 
 </body>
 

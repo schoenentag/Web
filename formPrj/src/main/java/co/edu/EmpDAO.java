@@ -1,10 +1,10 @@
 package co.edu;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmpDAO extends DAO {
 	// class => 복합적인 데이터 하나의 변수.
@@ -13,6 +13,58 @@ public class EmpDAO extends DAO {
 	 * public void insertEmp(int eId, String name, String email, String job) { }
 	 * 이렇게도 가능하나 매개변수가 많아지면 비효율적임
 	 */
+	//일정정보
+	public List<CalendarVO> getSchedule(){
+		// 숙제 : 전체 일정정보를 가지고 오도록 메소드 완성
+		getConnect();
+		List<String> list = new ArrayList<>();
+		String sql = "select * from full_calendar";
+		// 서버 서블릿 정보 받아오기
+
+//		fetch('FullCalendarServlet')
+//		.then(result => result.json())
+//		.then(result => {
+//			for(let field in result) {
+//				
+//			}
+//		})
+//		.catch(err => console.log(err));
+		
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			rs.next();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			disconnect();
+//		}
+		
+		return null;
+	}
+
+	// 부서정보, 인원정보
+	public Map<String, Integer> getDeptCnt() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		getConnect();
+		String sql = "select department_name, count(1) " + "from employees e, departments d "
+				+ "where e.department_id = d.department_id " + "group by department_name";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return map;
+	}
+
 	public void insertEmp(Employee emp) {
 		getConnect(); // DB연결하는 메소드
 		String sql = "insert into employees (employee_id, last_name, email, job_id, hire_date)"

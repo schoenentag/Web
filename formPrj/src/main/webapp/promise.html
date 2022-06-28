@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div id="show">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>회원이름</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>생년월일</th>
+					<th>사진</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+
+		</table>
+	</div>
+	<script>
+		// promise => petch : 상태 -pending(처리중), fullfilled(정상실행), resjected(비정상), then(), catch()
+		let promise = new Promise(function (resolve, reject) {
+			/* 비동기방식으로 실행 , 정상적으로 실행시 resolve 호출, 실패시 reject실행*/
+			setTimeout(function () {
+				resolve('success'); // 성공처리 실행할 콜백함수
+			}, 1000);
+		});
+		promise //promise 호출
+			.then(function (result) { // resolve가 매개값으로 들어감
+				console.log(result);
+			}) // 성공했을때 실행할 값
+			.catch(function (error) {
+				console.error(error);
+			}) // 실패했을때 실행할 값
+
+		function asyncwork(value) {
+			return new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					value -= 20;
+					if (value > 50) {
+						resolve(value);
+					} else {
+						reject(value);
+					}
+				}, 1000);
+
+			});
+		}
+		asyncwork(100)
+			.then(function (value) {
+				console.log(value);
+				return asyncwork(value);
+			})
+			.then(function (value) {
+				console.log(value);
+				return asyncwork(value);
+			})
+			.then(function (value) {
+				console.log(value);
+				return asyncwork(value);
+			})
+			.catch(function (error) {
+				console.log('catch' + error);
+			})
+
+		fetch('member?cmd=list') //json
+			.then(function (result) {
+				return result.json(); // text -> json 
+			})
+			.then(function (result) {
+
+				let tbody = document.querySelector('#show tbody');
+
+				result.forEach(member => {
+					tbody.append(makeTr(member));
+
+				});
+
+			})
+			.catch(function (error) {
+				console.error(error);
+			}) //fetch 끝
+
+		let fields = ['membNo', 'membName', 'membPhone', 'membAddr', 'membBirth', 'membImage'];
+
+		function makeTr(member) {
+			let tr = document.createElement('tr');
+			tr.setAttribute('id', member.membNo); //tr의 attribute 중에 id 활용
+			//tr.addEventListener('click', showDetail);
+
+			fields.forEach(field => {
+				let td = document.createElement('td');
+				//null, 0, undifined, '' => false이외 true;
+				td.innerHTML = member[field] ? member[field] : (!'' ? field == 'membImage' ? 'no img' : '' : '');
+				/* td.innerHTML = member[field]; */
+				tr.append(td);
+			})
+			//삭제 버튼
+			let btn = document.createElement('button');
+			btn.innerHTML = '삭제';
+			//btn.addEventListener('click', rowDelete,false); /* 더블링 false */
+			let td = document.createElement('td');
+			td.append(btn);
+			tr.append(td);
+			//체크박스.input type='checkbox', tr> td > 버튼
+			let chk = document.createElement('input');
+			chk.setAttribute("type", "checkbox");
+			td = document.createElement('td');
+			td.append(chk);
+			tr.append(td);
+
+			return tr;
+		} // tr생성 끝
+	</script>
+
+</body>
+
+</html>
