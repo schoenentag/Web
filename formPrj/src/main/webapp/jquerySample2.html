@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jquerySample2.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let data = [{
+            id: 'user1',
+            name: '홍길동',
+            phone: '010-1111-2222',
+            age: 15
+        }, {
+            id: 'user2',
+            name: '김자스',
+            phone: '010-1122-3322',
+            age: 17
+        }];
+
+        $(document).ready(function () {
+            console.log(data); //js
+            console.log($(data)); //jquery
+            let tbody = $('table > tbody');
+            //==data.forEach()
+            $(data).each((idx, val) => {
+                // tr > td, td, td, td
+                let delBtn = $('<button />').text('삭제');
+                delBtn.on('click', function () {
+                    console.log($(this))
+                    $(this).parent().parent().remove();
+                })
+                tbody.append(
+                    $('<tr />').attr('id', val.id) //attr 어트리뷰트
+                    .append(
+                        $('<td />').text(val.id), //<td>user1</td>
+                        $('<td />').text(val.name),
+                        $('<td />').text(val.phone),
+                        $('<td />').text(val.age),
+                        $('<td />').append(delBtn)
+
+                    )
+                );
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div id="show"></div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>회원아이디</th>
+                <th>회원이름</th>
+                <th>회원연락처</th>
+                <th>회원나이</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+</body>
+
+</html>
