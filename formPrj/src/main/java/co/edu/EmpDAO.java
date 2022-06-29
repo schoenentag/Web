@@ -13,35 +13,76 @@ public class EmpDAO extends DAO {
 	 * public void insertEmp(int eId, String name, String email, String job) { }
 	 * 이렇게도 가능하나 매개변수가 많아지면 비효율적임
 	 */
+	//입력기능
+	public boolean insertSchedule(CalendarVO vo) {
+		//정상적으로 한건 입력 true
+		//예외, 0건 : false;
+		getConnect();
+		String sql = "insert into full_calendar values(?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1,vo.getTitle());
+			psmt.setString(2,vo.getStartDate());
+			psmt.setString(3,vo.getEndDate());
+			
+			int r = psmt.executeUpdate();
+			if(r>0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+		return false;
+	}
+	
+	//삭제기능
+	public boolean deleteSchedule(CalendarVO vo) {
+		getConnect();
+		String sql = "delete full_calendar where title = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getTitle());
+			
+			int r = psmt.executeUpdate();
+			if (r>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+		return false;
+	}
+	
 	//일정정보
 	public List<CalendarVO> getSchedule(){
-		// 숙제 : 전체 일정정보를 가지고 오도록 메소드 완성
-		getConnect();
-		List<String> list = new ArrayList<>();
-		String sql = "select * from full_calendar";
-		// 서버 서블릿 정보 받아오기
+		   // 전체 일정정보를 가지고 오도록 메소드 완성하세요.
+	      getConnect();
+	      String sql = "select * from full_calendar";
+	      List<CalendarVO> list = new ArrayList<>();
+	      
+	      try {
+	         psmt = conn.prepareStatement(sql); // psmt : "select * from employees" 실행하고 결과 받아옴.
+	         rs = psmt.executeQuery(); // rs
+	         while (rs.next()) { // rs를 한건씩 끌어옴 -> 가지고 오면 true.
+	            CalendarVO  cal = new CalendarVO();
+	            cal.setTitle(rs.getString("title"));
+	            cal.setStartDate(rs.getString("start_date"));
+	            cal.setEndDate(rs.getString("end_date"));
+	            
+	            list.add(cal);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect(); // getConnect();
+	      }
+	      return list;
 
-//		fetch('FullCalendarServlet')
-//		.then(result => result.json())
-//		.then(result => {
-//			for(let field in result) {
-//				
-//			}
-//		})
-//		.catch(err => console.log(err));
-		
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//			rs = psmt.executeQuery();
-//			rs.next();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-		
-		return null;
 	}
 
 	// 부서정보, 인원정보
