@@ -33,6 +33,8 @@ public class MemberUpload extends HttpServlet {
 
 		boolean isMulti = ServletFileUpload.isMultipartContent(request);
 		if (isMulti) {
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 
 			String mn = request.getParameter("memberName"); // appliction/x-www-form-urlencoded => multipart/form-data
 
@@ -60,9 +62,11 @@ public class MemberUpload extends HttpServlet {
 			PrintWriter out = response.getWriter();
 
 			dao.insertMember(vo);
+			out.print(gson.toJson(vo));
 			System.out.println(mn);
+			
 			// {"retCode":"Fullfilled"}
-			out.print("{\"retCode\":\"Fullfilled\"}");
+			//out.print("{\"retCode\":\"Fullfilled\"}");
 		} else {
 			String cmd = request.getParameter("cmd");
 			String id = request.getParameter("delId");

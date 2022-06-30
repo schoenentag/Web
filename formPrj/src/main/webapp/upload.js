@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() { // (script태그가 �
 	};//onload끝
 
 	//form 기본 기능 => ajax 처리(XMLHttpRequest, fetch)
-	document.forms.memberFrm.addEventListener("submit", function(e) {
+	document.forms.bookInfo.addEventListener("submit", function(e) {
 		e.preventDefault(); //이벤트 기본기능 차단
 		let formData = new FormData(e.target); // e.target = form , form의 내용을 key와 value형식으로 바꾸어줌
 		for (let ent of formData.entries()) {
